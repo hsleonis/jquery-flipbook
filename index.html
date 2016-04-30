@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<script src="//cdn.jsdelivr.net/mobile-detect.js/0.4.3/mobile-detect.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+
+<link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="css/flipbook.style.css">
+<link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+
+<script src="js/flipbook.min.js"></script>
+
+<script type="text/javascript">
+
+    var isMobile = {
+        Android: function() {
+            return navigator.userAgent.match(/Android/i);
+        },
+        BlackBerry: function() {
+            return navigator.userAgent.match(/BlackBerry/i);
+        },
+        iOS: function() {
+            return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+        },
+        Opera: function() {
+            return navigator.userAgent.match(/Opera Mini/i);
+        },
+        Windows: function() {
+            return navigator.userAgent.match(/IEMobile/i);
+        },
+        any: function() {
+            return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+        }
+    };
+
+    if( isMobile.any() ){
+        window.location.assign("http://stsgroupbd.com/mobile");
+    }
+
+    $(document).ready(function () {
+		
+		function webgl_detect(return_context){
+            if (!!window.WebGLRenderingContext) {
+                var canvas = document.createElement("canvas"),
+                     names = ["webgl", "experimental-webgl", "moz-webgl", "webkit-3d"],
+                   context = false;
+
+                for(var i=0;i<4;i++) {
+                    try {
+                        context = canvas.getContext(names[i]);
+                        if (context && typeof context.getParameter == "function") {
+                            // WebGL is enabled
+                            if (return_context) {
+                                // return WebGL object if the function's argument is present
+                                return {name:names[i], gl:context};
+                            }
+                            // else, return just true
+                            return true;
+                        }
+                    } catch(e) {}
+                }
+
+                // WebGL is supported, but disabled
+                return false;
+            }
+
+            // WebGL not supported
+            return false;
+        }
+
+        webglTF = webgl_detect();
+		if(webglTF==true){
+			zoomvalue = 0.9;
+			}
+		else{
+			zoomvalue = 0.8;
+			}	
+		
+        $("#container").flipBook({
+            pages:[
+                {src:"images/book2/cover.jpg", thumb:"images/book2/thumb1.jpg", title:"Cover"},
+                {src:"images/book2/page1.jpg", thumb:"images/book2/thumb1.jpg", title:"About STS Group"},
+                {src:"images/book2/page2.jpg", thumb:"images/book2/thumb2.jpg", title:""},
+                {src:"images/book2/page3.jpg", thumb:"images/book2/thumb3.jpg", title:"Mission & Vission"},
+                {src:"images/book2/page4.jpg", thumb:"images/book2/thumb4.jpg", title:""},
+                {src:"images/book2/page5.jpg", thumb:"images/book2/thumb5.jpg", title:"Our Approch"},
+                {src:"images/book2/page6.jpg", thumb:"images/book2/thumb6.jpg", title:""},
+                {src:"images/book2/page7.jpg", thumb:"images/book2/thumb7.jpg", title:"Future Plan a"},
+                {src:"images/book2/page8.jpg", thumb:"images/book2/thumb8.jpg", title:""},
+                {src:"images/book2/page7.jpg", thumb:"images/book2/thumb7.jpg", title:"Future Plan b"},
+                {src:"images/book2/page9.jpg", thumb:"images/book2/thumb1.jpg", title:""},
+                {src:"images/book2/page7.jpg", thumb:"images/book2/thumb7.jpg", title:"Future Plan c"},
+                {src:"images/book2/page10.jpg", thumb:"images/book2/thumb2.jpg", title:""},
+                {src:"images/book2/page11.jpg", thumb:"images/book2/thumb3.jpg", title:"CSR"},
+                {src:"images/book2/page12.jpg", thumb:"images/book2/thumb4.jpg", title:""},
+                {src:"images/book2/page13.jpg", thumb:"images/book2/thumb5.jpg", title:"Chairmain"},
+                {src:"images/book2/page14.jpg", thumb:"images/book2/thumb6.jpg", title:""},
+                {src:"images/book2/page13.jpg", thumb:"images/book2/thumb5.jpg", title:"Managing Director"},
+                {src:"images/book2/page15.jpg", thumb:"images/book2/thumb7.jpg", title:""},
+                {src:"images/book2/page13.jpg", thumb:"images/book2/thumb5.jpg", title:"Managing Director"},
+                {src:"images/book2/page16.jpg", thumb:"images/book2/thumb8.jpg", title:""},
+                {src:"images/book2/page13.jpg", thumb:"images/book2/thumb5.jpg", title:"Director"},
+                {src:"images/book2/page17.jpg", thumb:"images/book2/thumb2.jpg", title:""},
+                {src:"images/book2/page13.jpg", thumb:"images/book2/thumb5.jpg", title:"Director"},
+                {src:"images/book2/page18.jpg", thumb:"images/book2/thumb3.jpg", title:""},
+                {src:"images/book2/page19.jpg", thumb:"images/book2/thumb4.jpg", title:"Join With Us"},
+                {src:"images/book2/page20.jpg", thumb:"images/book2/thumb5.jpg", title:""},
+                {src:"images/book2/page21.jpg", thumb:"images/book2/thumb1.jpg", title:"Contact Us"},
+                {src:"images/book2/page22.jpg", thumb:"images/book2/thumb6.jpg", title:""},
+                {src:"images/book2/last.jpg", thumb:"images/book2/thumb1.jpg", title:"The End"},
+
+            ],
+            btnThumbs : {enabled:false},
+            btnShare : {enabled:false},
+            btnDownloadPages : {enabled:false},
+            btnDownloadPdf: {
+                enabled: true,
+                title: "Download Prospectus",
+                icon: "fa-download",
+                url: "pdf/Red-Herring-Prospectus-STSHL.pdf"
+            },
+			deeplinking:{
+				enabled:true,
+				prefix:""
+			},
+			zoom: zoomvalue,
+			pageWidth:1100,
+			pageHeight:1200,
+            webgl:webglTF
+        });
+
+    })
+</script>
+
+</head>
+
+<body>
+<div id="container"/>
+
+<div class="home-btn"><a href="#1"><span class="fa-home flipbook-icon-general flipbook-menu-btn skin-color fa flipbook-color-light"></span></a></div>
+<a href="pdf/Red-Herring-Prospectus-STSHL.pdf" target="_blank" title="Download Prospectus"><span class="shahriar-btn">Download Prospectus</span></a>
+</body>
+
+</html>
